@@ -1,7 +1,23 @@
 import Head from "next/head";
 import tw from "twin.macro";
 
-export default function Home() {
+import prisma from "../lib/prisma";
+
+export const getStaticProps = async () => {
+  const clients = await prisma.client.findMany({
+    select: {
+      firstName: true,
+      lastName: true,
+      company: true,
+      phone: true,
+      email: true
+    }
+  });
+
+  return { props: { clients } };
+};
+
+export default function Home({ clients }) {
   return (
     <div tw="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
@@ -9,61 +25,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main tw="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 tw="text-8xl font-bold">
-          Welcome to{" "}
-          <a tw="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
+      <main tw="flex flex-col items-center justify-center w-full flex-1 px-10 py-20 text-center">
+        <h1 tw="mt-3 text-8xl font-semibold uppercase tracking-wide">
+          Clients
         </h1>
 
-        <p tw="mt-3 text-2xl">
-          Get started by editing{" "}
-          <code tw="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div tw="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            tw="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 tw="text-2xl font-bold">Documentation &rarr;</h3>
-            <p tw="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            tw="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 tw="text-2xl font-bold">Learn &rarr;</h3>
-            <p tw="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            tw="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 tw="text-2xl font-bold">Examples &rarr;</h3>
-            <p tw="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            tw="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 tw="text-2xl font-bold">Deploy &rarr;</h3>
-            <p tw="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <div tw="grid grid-cols-1 gap-2 items-center justify-around max-w-7xl mt-6 w-full">
+          {clients.map((client) => (
+            <a
+              key={client.id}
+              href="https://nextjs.org/docs"
+              tw="p-6 mt-6 text-left border  rounded-xl hover:text-blue-600 focus:text-blue-600"
+            >
+              <h3 tw="text-2xl font-bold">{`${client.firstName} ${client.lastName}`}</h3>
+              <p tw="mt-4 text-xl">{client.company}</p>
+              <p tw="mt-4 text-xl">{client.email}</p>
+            </a>
+          ))}
         </div>
       </main>
 
