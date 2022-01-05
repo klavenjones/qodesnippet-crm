@@ -36,7 +36,7 @@ export const MobileNavigation = ({
             leaveFrom="translate-x-0"
             leaveTo="-translate-x-full"
           >
-            <div tw="relative flex-1 flex flex-col max-w-xs w-full bg-gray-800">
+            <div tw="relative flex-1 flex flex-col max-w-xs w-full bg-green-900">
               <Transition.Child
                 as={Fragment}
                 enter="ease-in-out duration-300"
@@ -71,16 +71,16 @@ export const MobileNavigation = ({
                       css={[
                         tw`flex items-center px-2 py-2 text-base font-medium rounded-md`,
                         item.current
-                          ? tw`bg-gray-900 text-white`
-                          : tw`text-gray-300 hover:bg-gray-700 hover:text-white`
+                          ? tw`bg-green-700 text-white`
+                          : tw`text-gray-300 hover:bg-green-700 hover:text-white`
                       ]}
                     >
                       <item.icon
                         css={[
                           tw`mr-4 flex-shrink-0 h-6 w-6`,
                           item.current
-                            ? tw`text-gray-300`
-                            : tw`text-gray-400 hover:text-gray-300`
+                            ? tw`text-gray-50`
+                            : tw`text-gray-50 hover:text-white`
                         ]}
                         aria-hidden="true"
                       />
@@ -88,16 +88,16 @@ export const MobileNavigation = ({
                     </a>
                   ))}
                 </nav>
-                <div tw="mt-10 border-t border-gray-900 p-2 space-y-1">
+                <div tw="mt-10 border-t border-gray-900 px-2 pb-2 pt-5 space-y-1">
                   <a
                     onClick={() => signOut()}
                     css={[
-                      tw`flex items-center px-2 py-2 text-base font-medium rounded-md w-full text-gray-300 hover:bg-gray-700 hover:text-white`
+                      tw`flex items-center px-2 py-2 text-base font-medium rounded-md w-full text-gray-50 hover:bg-green-700 hover:text-white`
                     ]}
                   >
                     <HiOutlineCog
                       css={[
-                        tw`mr-3 flex-shrink-0 h-6 w-6 text-gray-400 hover:text-gray-300`
+                        tw`mr-3 flex-shrink-0 h-6 w-6 text-gray-50 hover:text-white`
                       ]}
                       aria-hidden="true"
                     />
@@ -106,12 +106,12 @@ export const MobileNavigation = ({
                   <button
                     onClick={() => signOut()}
                     css={[
-                      tw`flex items-center px-2 py-2 text-base font-medium rounded-md w-full text-gray-300 hover:bg-gray-700 hover:text-white`
+                      tw`flex items-center px-2 py-2 text-base font-medium rounded-md w-full text-gray-50 hover:bg-green-700 hover:text-white`
                     ]}
                   >
                     <HiOutlineLogout
                       css={[
-                        tw`mr-3 flex-shrink-0 h-6 w-6 text-gray-400 hover:text-gray-300`
+                        tw`mr-3 flex-shrink-0 h-6 w-6 text-gray-50 hover:text-white`
                       ]}
                       aria-hidden="true"
                     />

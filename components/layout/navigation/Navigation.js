@@ -8,21 +8,13 @@ import {
   HiOutlineMenu,
   HiOutlineUser,
   HiOutlineLogout,
-  HiOutlineCog,
-  HiOutlineFolder,
-  HiOutlineCalendar,
-  HiOutlineInbox,
-  HiOutlineChartBar
+  HiOutlineCog
 } from "react-icons/hi";
 
 import { MobileNavigation } from "./MobileNavigation";
 const navigation = [
-  { name: "Dashboard", href: "#", icon: HiOutlineHome, current: true },
-  { name: "Clients", href: "#", icon: HiOutlineUser, current: false },
-  { name: "Projects", href: "#", icon: HiOutlineFolder, current: false },
-  { name: "Calendar", href: "#", icon: HiOutlineCalendar, current: false },
-  { name: "Documents", href: "#", icon: HiOutlineInbox, current: false },
-  { name: "Reports", href: "#", icon: HiOutlineChartBar, current: false }
+  { name: "Home", href: "#", icon: HiOutlineHome, current: true },
+  { name: "Clients", href: "#", icon: HiOutlineUser, current: false }
 ];
 
 export const Navigation = ({ children }) => {
@@ -71,7 +63,7 @@ export const Navigation = ({ children }) => {
                 </a>
               ))}
             </nav>
-            <div tw="mt-10 border-t border-gray-900 p-2 space-y-1">
+            <div tw="mt-10 border-t border-gray-900 px-2 pb-2 pt-5 space-y-1">
               <a
                 onClick={() => signOut()}
                 css={[
@@ -119,10 +111,10 @@ export const Navigation = ({ children }) => {
         </div>
       </div>
       <div tw="md:pl-72 flex flex-col flex-1">
-        <div tw="sticky flex top-0 z-10 md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3 bg-gray-100">
+        <div tw="sticky flex top-0 z-10 md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3 bg-white">
           <button
             type="button"
-            tw="ml-auto -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+            tw="ml-auto -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-600"
             onClick={() => setSidebarOpen(true)}
           >
             <span tw="sr-only">Open sidebar</span>
