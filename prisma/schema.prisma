@@ -11,14 +11,14 @@ datasource db {
 }
 
 model Client {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid())
   firstName String?
   lastName  String?
   email     String?
   phone     String?
   company   String?
   user      User     @relation(fields: [userId], references: [id])
-  userId    Int
+  userId    String
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
@@ -26,13 +26,13 @@ model Client {
 }
 
 model Account {
-  id                Int     @id @default(autoincrement())
+  id                String  @id @default(cuid())
   type              String
   provider          String
   providerAccountId String
   refresh_token     String? @map("refresh_token")
   access_token      String? @map("access_token")
-  expiresAt         Int?    @map("expires_at")
+  expires_at        Int?    @map("expires_at")
   token_type        String? @map("token_type")
   scope             String?
   id_token          String?
@@ -40,16 +40,16 @@ model Account {
   oauthTokenSecret  String? @map("oauth_token_secret")
   oauthToken        String? @map("oauth_token")
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId            Int
+  userId            String
 
   @@unique([provider, providerAccountId])
   @@map(name: "accounts")
 }
 
 model Session {
-  id           Int      @id @default(autoincrement())
+  id           String   @id @default(cuid())
   sessionToken String   @unique
-  userId       Int
+  userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -57,7 +57,7 @@ model Session {
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
+  id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
   emailVerified DateTime?
@@ -70,7 +70,7 @@ model User {
 }
 
 model VerificationToken {
-  id         Int      @id @default(autoincrement())
+  id         String   @id @default(cuid())
   identifier String
   token      String   @unique
   expires    DateTime

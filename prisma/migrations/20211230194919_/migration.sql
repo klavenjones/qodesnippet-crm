@@ -1,12 +1,12 @@
 -- CreateTable
 CREATE TABLE "clients" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "firstName" TEXT,
     "lastName" TEXT,
     "email" TEXT,
     "phone" TEXT,
     "company" TEXT,
-    "userId" INTEGER NOT NULL,
+    "userId" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
@@ -15,7 +15,7 @@ CREATE TABLE "clients" (
 
 -- CreateTable
 CREATE TABLE "accounts" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "provider" TEXT NOT NULL,
     "providerAccountId" TEXT NOT NULL,
@@ -28,16 +28,16 @@ CREATE TABLE "accounts" (
     "session_state" TEXT,
     "oauth_token_secret" TEXT,
     "oauth_token" TEXT,
-    "userId" INTEGER NOT NULL,
+    "userId" TEXT NOT NULL,
 
     CONSTRAINT "accounts_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "sessions" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "sessionToken" TEXT NOT NULL,
-    "userId" INTEGER NOT NULL,
+    "userId" TEXT NOT NULL,
     "expires" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "sessions_pkey" PRIMARY KEY ("id")
@@ -45,7 +45,7 @@ CREATE TABLE "sessions" (
 
 -- CreateTable
 CREATE TABLE "users" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT,
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
@@ -56,7 +56,7 @@ CREATE TABLE "users" (
 
 -- CreateTable
 CREATE TABLE "verifications" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "identifier" TEXT NOT NULL,
     "token" TEXT NOT NULL,
     "expires" TIMESTAMP(3) NOT NULL,
