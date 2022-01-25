@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import tw from "twin.macro";
+import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { FaGithub, FaGoogle, FaEnvelope, FaFacebook } from "react-icons/fa";
 import { LoginContainer, LoginSectionContainer } from "./Login.styles";
 import { Button, Input } from "@components/forms";
 
 export const Login = () => {
+  const { register, handleSubmit } = useForm();
+  const [email, setEmail] = useState("");
+
   return (
     <LoginContainer tw="space-y-8">
       <LoginSectionContainer>
@@ -45,18 +49,25 @@ export const Login = () => {
         <p tw="text-center text-xl uppercase">Or</p>
       </LoginSectionContainer>
       <LoginSectionContainer>
-        <div className="space-y-6">
-          <Input placeholder="Enter Email" />
-          <Button
-            onClick={() => signIn("email", { email: "klavensjones@gmail.com" })}
-            tw="flex items-center text-white w-full"
-            variant="primary"
+        <div>
+          <form
+            className="space-y-6"
+            onSubmit={handleSubmit((data) =>
+              signIn("email", { email: data.email })
+            )}
           >
-            <span tw="inline-block mr-4">
-              <FaEnvelope tw="h-4 w-4" />
-            </span>{" "}
-            Log in with your email
-          </Button>
+            <Input placeholder="Enter Email" {...register("email")} />
+            <Button
+              type="submit"
+              tw="flex items-center text-white w-full"
+              variant="primary"
+            >
+              <span tw="inline-block mr-4">
+                <FaEnvelope tw="h-4 w-4" />
+              </span>{" "}
+              Log in with your email
+            </Button>
+          </form>
         </div>
       </LoginSectionContainer>
     </LoginContainer>
