@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { Dashboard } from "@components/views";
 import { Navigation } from "@components/layout/navigation/Navigation";
+import { PageHeader } from "@components/layout";
 
 export default function DashboardHome() {
   const router = useRouter();
@@ -21,6 +22,7 @@ export default function DashboardHome() {
   return (
     <>
       <Navigation>
+        <PageHeader pageTitle={"Dasboard"} />
         <Dashboard />
       </Navigation>
       ;
