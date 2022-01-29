@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     if (session) {
       const result = await prisma.client.findUnique({
         where: {
-          id: Number(id)
+          id: id
         }
       });
       res.json(result);
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     if (session) {
       const result = await prisma.client.delete({
         where: {
-          id: Number(id)
+          id: id
         }
       });
 
@@ -35,17 +35,29 @@ export default async function handler(req, res) {
 
   if (req.method === "PUT") {
     if (session) {
-      const { firstName, lastName, company, phone, email } = req.body;
+      const {
+        firstname,
+        lastname,
+        title,
+        notes,
+        company,
+        phone,
+        email,
+        image
+      } = req.body;
       const result = await prisma.client.update({
         where: {
-          id: Number(id)
+          id: id
         },
         data: {
-          firstName: firstName,
-          lastName: lastName,
+          firstName: firstname,
+          lastName: lastname,
+          title: title,
+          notes: notes,
           company: company,
           phone: phone,
-          email: email
+          email: email,
+          image: image
         }
       });
       res.json(result);

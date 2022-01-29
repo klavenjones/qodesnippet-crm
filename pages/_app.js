@@ -1,5 +1,6 @@
 import "tailwindcss/tailwind.css";
 import { SessionProvider } from "next-auth/react";
+import { SWRConfig } from "swr";
 import { Global, css } from "@emotion/react";
 import { GlobalStyles as BaseStyles } from "twin.macro";
 
@@ -14,9 +15,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <div tw="relative">
       <SessionProvider session={session}>
-        <BaseStyles />
-        <Global styles={customStyles} />
-        <Component {...pageProps} />
+        <SWRConfig>
+          <BaseStyles />
+          <Global styles={customStyles} />
+          <Component {...pageProps} />
+        </SWRConfig>
       </SessionProvider>
     </div>
   );

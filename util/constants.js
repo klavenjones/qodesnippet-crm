@@ -1,0 +1,1 @@
+export const PLACEHOLDER = `https://via.placeholder.com/300.png/2a9d8f/fff/O%20https://placeholder.com/`

@@ -6,3 +6,6 @@ export const fetcher = (url, data = undefined) =>
     method: data ? "POST" : "GET",
     data: data
   }).then((response) => response.data);
+
+
+  

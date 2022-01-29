@@ -1,6 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { useState } from "react";
-
+import { useRouter } from "next/router";
 import tw from "twin.macro";
 import { signOut } from "next-auth/react";
 import {
@@ -12,13 +12,25 @@ import {
 } from "react-icons/hi";
 
 import { MobileNavigation } from "./MobileNavigation";
-const navigation = [
-  { name: "Home", href: "#", icon: HiOutlineHome, current: true },
-  { name: "Clients", href: "#", icon: HiOutlineUser, current: false }
-];
 
 export const Navigation = ({ children }) => {
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const navigation = [
+    {
+      name: "Home",
+      href: "/dashboard",
+      icon: HiOutlineHome,
+      current: router.pathname === "/dashboard"
+    },
+    {
+      name: "Clients",
+      href: "/dashboard/clients",
+      icon: HiOutlineUser,
+      current: router.pathname === "/dashboard/clients"
+    }
+  ];
 
   return (
     <>
@@ -46,13 +58,13 @@ export const Navigation = ({ children }) => {
                   css={[
                     tw`flex items-center px-2 py-2 text-base font-medium rounded-md`,
                     item.current
-                      ? tw`bg-gray-900 text-white`
+                      ? tw`text-white bg-gray-900`
                       : tw`text-gray-300 hover:bg-gray-700 hover:text-white`
                   ]}
                 >
                   <item.icon
                     css={[
-                      tw`mr-3 flex-shrink-0 h-6 w-6`,
+                      tw`flex-shrink-0 w-6 h-6 mr-3`,
                       item.current
                         ? tw`text-gray-300`
                         : tw`text-gray-400 hover:text-gray-300`
@@ -67,12 +79,12 @@ export const Navigation = ({ children }) => {
               <a
                 onClick={() => signOut()}
                 css={[
-                  tw`flex items-center px-2 py-2 text-base font-medium rounded-md w-full text-gray-300 hover:bg-gray-700 hover:text-white`
+                  tw`flex items-center w-full px-2 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white`
                 ]}
               >
                 <HiOutlineCog
                   css={[
-                    tw`mr-3 flex-shrink-0 h-6 w-6 text-gray-400 hover:text-gray-300`
+                    tw`flex-shrink-0 w-6 h-6 mr-3 text-gray-400 hover:text-gray-300`
                   ]}
                   aria-hidden="true"
                 />
@@ -81,12 +93,12 @@ export const Navigation = ({ children }) => {
               <button
                 onClick={() => signOut()}
                 css={[
-                  tw`flex items-center px-2 py-2 text-base font-medium rounded-md w-full text-gray-300 hover:bg-gray-700 hover:text-white`
+                  tw`flex items-center w-full px-2 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white`
                 ]}
               >
                 <HiOutlineLogout
                   css={[
-                    tw`mr-3 flex-shrink-0 h-6 w-6 text-gray-400 hover:text-gray-300`
+                    tw`flex-shrink-0 w-6 h-6 mr-3 text-gray-400 hover:text-gray-300`
                   ]}
                   aria-hidden="true"
                 />
@@ -99,7 +111,7 @@ export const Navigation = ({ children }) => {
               <div tw="flex items-center">
                 <div>
                   <HiOutlineLogout
-                    css={[tw`mr-3 h-6 w-6 text-gray-400 hover:text-gray-300`]}
+                    css={[tw`w-6 h-6 mr-3 text-gray-400 hover:text-gray-300`]}
                   />
                 </div>
                 <div>

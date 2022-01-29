@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import { Dashboard } from "@components/views";
-import { PageHeader, AddClientSlideOver, Navigation } from "@components/layout";
+import {
+  PageHeader,
+  Navigation,
+  AddClientSlideOver,
+  ClientList
+} from "@components/layout";
 import { fetcher } from "util/fetcher";
 
-export default function DashboardHome() {
+export default function ClientsPage() {
   const router = useRouter();
   const { status } = useSession({
     required: true,
@@ -29,11 +33,10 @@ export default function DashboardHome() {
   return (
     <>
       <Navigation>
-        <PageHeader pageTitle={"Dasboard"} openMenu={setOpen} />
+        <PageHeader pageTitle={"Clients"} openMenu={setOpen} />
         <AddClientSlideOver open={open} setOpen={setOpen} />
-        <Dashboard clients={data.slice(0, 4)} />
+        <ClientList clients={data} />
       </Navigation>
-      ;
     </>
   );
 }
