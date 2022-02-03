@@ -2,7 +2,6 @@ import axios from "axios";
 import { PLACEHOLDER } from "./constants";
 
 export const uploadImage = async (image) => {
-  console.log("IMAGE", image);
   try {
     if (image.length === 0 || typeof image === "string") {
       return PLACEHOLDER;
@@ -18,7 +17,6 @@ export const uploadImage = async (image) => {
     );
     return imageUpload?.data.secure_url;
   } catch (error) {
-    console.log(error.message);
     return "Something went wrong";
   }
 };

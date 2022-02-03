@@ -29,8 +29,11 @@ export function AddClientSlideOver({ open, setOpen, client }) {
       return await axios.put(`/api/client/${client.id}`, {
         firstName: data.firstname,
         lastName: data.lastname,
-        ...data,
-        image: result
+        title: data.title,
+        company: data.company,
+        email: data.email,
+        phone: data.phone,
+        notes: data.notes
       });
     }
 
@@ -42,21 +45,39 @@ export function AddClientSlideOver({ open, setOpen, client }) {
     });
   };
 
-  const submitClient = async (data) => {
-    const { firstname, lastname, title, company, email, phone, notes, image } =
-      data;
-
-    const result = await uploadImage(image);
+  const submitClient = async (data, e) => {
+    e.preventDefault();
+    const result = await uploadImage(data.image);
 
     if (client) {
       await makeRequest(result, data, client);
-      Router.push("/dashboard/clients");
+      mutate(`/api/client/${client.id}`);
     } else {
       await makeRequest(result, data);
       mutate("/api/client");
     }
+
     reset();
     setOpen(false);
+  };
+
+  const renderImageInput = () => {
+    return (
+      <div>
+        <label htmlFor="image" tw="block text-sm font-medium text-gray-900">
+          Client Image
+        </label>
+        <div tw="mt-1">
+          <Input
+            {...register("image")}
+            type="file"
+            name="image"
+            id="image"
+            tw="block w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-green-500 focus:border-green-500"
+          />
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -88,7 +109,7 @@ export function AddClientSlideOver({ open, setOpen, client }) {
                     <div tw="px-4 py-6 bg-green-700 sm:px-6">
                       <div tw="flex items-center justify-between mb-3">
                         <Dialog.Title tw="text-lg font-medium text-white">
-                          New Client
+                          {client ? "Edit Client" : "New Client"}
                         </Dialog.Title>
                         <div tw="flex items-center ml-3 h-7">
                           <button
@@ -214,7 +235,7 @@ export function AddClientSlideOver({ open, setOpen, client }) {
                               </div>
                             </div>
                           </div>
-                          <div>
+                          {/* <div>
                             <label
                               htmlFor="image"
                               tw="block text-sm font-medium text-gray-900"
@@ -230,7 +251,8 @@ export function AddClientSlideOver({ open, setOpen, client }) {
                                 tw="block w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-green-500 focus:border-green-500"
                               />
                             </div>
-                          </div>
+                          </div> */}
+                          {!client && renderImageInput()}
                           <div>
                             <label
                               htmlFor="notes"

@@ -7,7 +7,6 @@ import Router from "next/router";
 import axios from "axios";
 
 export const DeleteConfirmModal = ({ setOpen, open, client }) => {
-  console.log(client.id);
   const deleteClient = async (clientId) => {
     return axios.delete(`/api/client/${clientId}`);
   };

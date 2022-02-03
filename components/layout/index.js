@@ -5,3 +5,4 @@ export * from "./section-header";
 export * from "./client-list";
 export * from "./overlays";
 export * from "./content";
+export * from "./loader";

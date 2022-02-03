@@ -17,6 +17,9 @@ module.exports = {
         112: "28rem",
         128: "32rem",
         144: "36rem"
+      },
+      animation: {
+        "bounce-slow": "bounce 1s ease-in-out infinite"
       }
     }
   },
@@ -26,6 +29,7 @@ module.exports = {
   plugins: [
     require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/forms"),
-    require("@tailwindcss/typography")
+    require("@tailwindcss/typography"),
+    require("tailwindcss-animation-delay")
   ]
 };

@@ -8,4 +8,3 @@ export const fetcher = (url, data = undefined) =>
   }).then((response) => response.data);
 
 
-  

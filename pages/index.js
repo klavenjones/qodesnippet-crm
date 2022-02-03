@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { fetcher } from "../util/fetcher";
-import { NarrowContainer } from "@components/layout";
+import { Loader, NarrowContainer } from "@components/layout";
 import { Login } from "@components/views";
 
 /** @param {import('next').InferGetServerSidePropsType<typeof getServerSideProps> } props */
@@ -18,7 +18,7 @@ export default function HomePage() {
   }, [status]);
 
   if (status === "loading" && status !== "authenticated") {
-    return <h1>Loading.....</h1>;
+    return <Loader />;
   }
 
   return (

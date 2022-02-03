@@ -36,8 +36,8 @@ export default async function handler(req, res) {
   if (req.method === "PUT") {
     if (session) {
       const {
-        firstname,
-        lastname,
+        firstName,
+        lastName,
         title,
         notes,
         company,
@@ -45,13 +45,14 @@ export default async function handler(req, res) {
         email,
         image
       } = req.body;
+
       const result = await prisma.client.update({
         where: {
           id: id
         },
         data: {
-          firstName: firstname,
-          lastName: lastname,
+          firstName: firstName,
+          lastName: lastName,
           title: title,
           notes: notes,
           company: company,

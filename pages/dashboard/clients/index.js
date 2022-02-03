@@ -6,7 +6,8 @@ import {
   PageHeader,
   Navigation,
   AddClientSlideOver,
-  ClientList
+  ClientList,
+  Loader
 } from "@components/layout";
 import { fetcher } from "util/fetcher";
 
@@ -23,11 +24,11 @@ export default function ClientsPage() {
   const [open, setOpen] = useState(false);
 
   if (error) {
-    return <h1>ERROR</h1>;
+    return null;
   }
 
   if (status === "loading" || !data) {
-    return <h1>Loading</h1>;
+    return <Loader />;
   }
 
   return (

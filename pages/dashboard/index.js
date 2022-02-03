@@ -3,7 +3,12 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { Dashboard } from "@components/views";
-import { PageHeader, AddClientSlideOver, Navigation } from "@components/layout";
+import {
+  PageHeader,
+  AddClientSlideOver,
+  Navigation,
+  Loader
+} from "@components/layout";
 import { fetcher } from "util/fetcher";
 
 export default function DashboardHome() {
@@ -19,11 +24,11 @@ export default function DashboardHome() {
   const [open, setOpen] = useState(false);
 
   if (error) {
-    return <h1>ERROR</h1>;
+    return null;
   }
 
   if (status === "loading" || !data) {
-    return <h1>Loading</h1>;
+    return <Loader />;
   }
 
   return (
